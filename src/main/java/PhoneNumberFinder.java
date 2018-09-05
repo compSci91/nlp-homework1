@@ -8,7 +8,7 @@ public class PhoneNumberFinder {
 
         String areaCodeRegEx = "\\(?([\\d]{3})\\)?";
         String phoneNumberRegEx = "([\\d]{3}-[\\d]{4})";
-        String prefixRegEx = "(Phone|Tel \\(\\+1\\))";
+        String prefixRegEx = "(Phone|Tel \\(\\+[\\d]{1,3}\\))";
 
         String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[\\s|-]" + phoneNumberRegEx;
 
