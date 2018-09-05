@@ -4,17 +4,6 @@ import java.util.regex.Pattern;
 public class EmailFinder {
     public String findEmail(String perspectiveEmail) {
 
-        /*
-            1. Any number of letters
-            2. @ or (at) or _at_
-            3. Any number of letters
-            4. cse
-            5. . or _dot_
-            6. tamu
-            7. . or _dot_
-            8. .edu
-         */
-
         String nameRegEx = "[a-z]*";
         String atRegex =  "(\\(at\\)|\\sat\\s|@)";
         String dotRegex = "(\\.|\\sdot\\s)";
@@ -34,7 +23,17 @@ public class EmailFinder {
             perspectiveEmail = perspectiveEmail.replaceAll(" dot ", ".");
         }
 
+        String anotherRegularExpression ="<script type=\"text/javascript\">obfuscate\\(’(cse.tamu.edu)’,’(huangrh)’\\)</script>";
 
+        pattern = Pattern.compile(anotherRegularExpression);
+        matcher = pattern.matcher(perspectiveEmail);
+
+        if (matcher.matches()) {
+            for (int i = 0; i <= matcher.groupCount(); i++) {
+                System.out.println(i + " --> " + matcher.group(i));
+                System.out.println(matcher.group(i));
+            }
+        }
 
 
 

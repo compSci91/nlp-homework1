@@ -42,4 +42,14 @@ public class EmailFinderTest {
 
         Assert.assertEquals(expectedEmail, returnedEmail);
     }
+
+    @Test
+    public void shouldReturnEmailWhenThereIsAJavaScriptObfuscation(){
+        EmailFinder emailFinder = new EmailFinder();
+        String expectedEmail = "huangrh@cse.tamu.edu";
+
+        String returnedEmail = emailFinder.findEmail("<script type=\"text/javascript\">obfuscate(’cse.tamu.edu’,’huangrh’)</script>");
+
+        Assert.assertEquals(expectedEmail, returnedEmail);
+    }
 }
