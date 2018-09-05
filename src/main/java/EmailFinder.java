@@ -33,6 +33,8 @@ public class EmailFinder {
                 System.out.println(i + " --> " + matcher.group(i));
                 System.out.println(matcher.group(i));
             }
+
+            perspectiveEmail = matcher.group(2) + "@" + matcher.group(1);
         }
 
 
