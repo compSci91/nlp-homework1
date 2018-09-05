@@ -14,7 +14,12 @@ public class EmailFinder {
             7. . or _dot_
             8. .edu
          */
-        String regularExpression ="[a-z]*(\\(at\\)|\\sat\\s|@)[\\s]*cse(\\.|\\sdot\\s)tamu(\\.|\\sdot\\s)edu";
+
+        String nameRegEx = "[a-z]*";
+        String atRegex =  "(\\(at\\)|\\sat\\s|@)";
+        String dotRegex = "(\\.|\\sdot\\s)";
+
+        String regularExpression = nameRegEx + atRegex + "cse" + dotRegex + "tamu" + dotRegex + "edu";
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectiveEmail);
 
