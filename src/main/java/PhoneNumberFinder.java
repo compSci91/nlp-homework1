@@ -6,7 +6,7 @@ public class PhoneNumberFinder {
         String reconstructedPhoneNumber = "";
 
 
-        String regularExpression = "Phone: \\((979)\\) (862-2908)";
+        String regularExpression = "Phone: \\(([\\d]{3})\\) ([\\d]{3}-[\\d]{4})";
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectivePhoneNumber);
 
