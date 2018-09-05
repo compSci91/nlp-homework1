@@ -24,7 +24,7 @@ public class EmailFinderTest {
     }
 
     @Test
-    public void shouldReturnEmailWhenTheWordAtIsUsedWithoutParentheisInsteadOfAnAtMark(){
+    public void shouldReturnEmailWhenTheWordAtIsUsedWithoutParenthesesInsteadOfAnAtMark(){
         EmailFinder emailFinder = new EmailFinder();
         String expectedEmail = "huangrh@cse.tamu.edu";
 
@@ -33,6 +33,7 @@ public class EmailFinderTest {
         Assert.assertEquals(expectedEmail, returnedEmail);
     }
 
+    @Test
     public void shouldReturnEmailWhenAllSymbolsHaveBeenTurnedIntoWords(){
         EmailFinder emailFinder = new EmailFinder();
         String expectedEmail = "huangrh@cse.tamu.edu";

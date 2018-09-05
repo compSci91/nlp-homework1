@@ -8,9 +8,13 @@ public class EmailFinder {
             1. Any number of letters
             2. @ or (at) or _at_
             3. Any number of letters
-            4. .edu
+            4. cse
+            5. . or _dot_
+            6. tamu
+            7. . or _dot_
+            8. .edu
          */
-        String regularExpression ="[a-z]*(\\(at\\)|\\sat\\s|@)cse\\.tamu\\.edu";
+        String regularExpression ="[a-z]*(\\(at\\)|\\sat\\s|@)[\\s]*cse(\\.|\\sdot\\s)tamu(\\.|\\sdot\\s)edu";
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectiveEmail);
 
@@ -22,6 +26,7 @@ public class EmailFinder {
 
             perspectiveEmail = perspectiveEmail.replaceAll("\\(at\\)", "@");
             perspectiveEmail = perspectiveEmail.replaceAll(" at ", "@");
+            perspectiveEmail = perspectiveEmail.replaceAll(" dot ", ".");
         }
 
 
