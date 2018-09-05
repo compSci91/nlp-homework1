@@ -6,7 +6,12 @@ public class PhoneNumberFinder {
         String reconstructedPhoneNumber = "";
 
 
-        String regularExpression = "Phone: \\(([\\d]{3})\\) ([\\d]{3}-[\\d]{4})";
+        String areaCodeRegEx = "\\(?([\\d]{3})\\)?";
+        String phoneNumberRegEx = "([\\d]{3}-[\\d]{4})";
+        String prefixRegEx = "(Phone|Tel \\(\\+1\\))";
+
+        String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[\\s|-]" + phoneNumberRegEx;
+
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectivePhoneNumber);
 
@@ -16,7 +21,9 @@ public class PhoneNumberFinder {
                 System.out.println(matcher.group(i));
             }
 
-           reconstructedPhoneNumber =  matcher.group(1) + "-" + matcher.group(2);
+           reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3);
+
+            return reconstructedPhoneNumber;
         }
 
 

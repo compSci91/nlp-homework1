@@ -14,4 +14,14 @@ public class PhoneNumberFinderTest {
 
         Assert.assertEquals(expectedPhoneNumber, returnedPhoneNumber);
     }
+
+    @Test
+    public void shouldReturnPHoneNumberWhenLabeledWithTelAndCountryCode() {
+        String expectedPhoneNumber = "979-862-2908";
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        String returnedPhoneNumber = phoneNumberFinder.findPhoneNumber("Tel (+1): 979-862-2908");
+
+        Assert.assertEquals(expectedPhoneNumber, returnedPhoneNumber);
+    }
 }
