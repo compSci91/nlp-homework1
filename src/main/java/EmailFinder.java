@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailFinder {
-    public String findEmail(String perspectiveEmail) {
+    public List<String> findEmail(String perspectiveEmail) {
 
         String nameRegEx = "[a-z]*";
         String atRegex =  "(\\(at\\)|\\sat\\s|@)";
@@ -38,8 +40,10 @@ public class EmailFinder {
         }
 
 
+        List<String> foundEmails = new ArrayList<String>();
+        foundEmails.add(perspectiveEmail);
 
 
-        return perspectiveEmail;
+        return foundEmails;
     }
 }
