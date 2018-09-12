@@ -65,4 +65,23 @@ public class EmailFinderTest {
 
         Assert.assertEquals(expectedEmails, returnedEmails);
     }
+
+    @Test
+    public void shouldReturnEmailsFromAStringWhichContainsMoreThanJustEmails(){
+        EmailFinder emailFinder = new EmailFinder();
+        List<String> expectedEmails = new ArrayList<String>() {{ add("huangrh@cse.tamu.edu");  add("howjosh@cse.tamu.edu"); }};
+
+        List<String> returnedEmails = emailFinder.findEmail("huangrh at cse dot tamu dot edu \n howjosh(at)cse.tamu.edu extra stuff at the end ldjfsl ;f");
+        Assert.assertEquals(expectedEmails, returnedEmails);
+
+    }
+
+    @Test
+    public void shouldReturnEmailsFromAStringWhichContainsAllTypesOfEmails(){
+        EmailFinder emailFinder = new EmailFinder();
+        List<String> expectedEmails = new ArrayList<String>() {{ add("huangrh@cse.tamu.edu");   add("howjosh@cse.tamu.edu"); add("osa@cse.tamu.edu");}};
+
+        List<String> returnedEmails = emailFinder.findEmail("huangrh at cse dot tamu dot edu \n <script type=\"text/javascript\">obfuscate(’cse.tamu.edu’,’osa’)</script> ldjskflsfdj howjosh(at)cse.tamu.edu extra stuff at the end ldjfsl ;f");
+        Assert.assertEquals(expectedEmails, returnedEmails);
+    }
 }
