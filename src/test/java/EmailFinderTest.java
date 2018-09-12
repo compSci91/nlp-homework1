@@ -84,4 +84,15 @@ public class EmailFinderTest {
         List<String> returnedEmails = emailFinder.findEmail("huangrh at cse dot tamu dot edu \n <script type=\"text/javascript\">obfuscate(’cse.tamu.edu’,’osa’)</script> ldjskflsfdj howjosh(at)cse.tamu.edu extra stuff at the end ldjfsl ;f");
         Assert.assertEquals(expectedEmails, returnedEmails);
     }
+
+    @Test
+    public void shouldReturnEmailsWhenThereIsASpaceBetweenTheLocalPartAndTheDomain(){
+        EmailFinder emailFinder = new EmailFinder();
+        List<String> expectedEmails = new ArrayList<String>() {{ add("ashishg@stanford.edu");}};
+
+        List<String> returnedEmails = emailFinder.findEmail("    Email: ashishg @ stanford.edu<o:p></o:p><br>\n");
+        Assert.assertEquals(expectedEmails, returnedEmails);
+    }
+
+
 }

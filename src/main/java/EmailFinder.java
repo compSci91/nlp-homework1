@@ -7,11 +7,15 @@ public class EmailFinder {
     public List<String> findEmail(String perspectiveEmail) {
         List<String> foundEmails = new ArrayList<String>();
 
-        String localPart = "[a-z]*";
-        String atRegex =  "(\\(at\\)|\\sat\\s|@)";
+        String localPart = "[a-zA-Z]*";
+        String atRegex =  "(\\(at\\)|\\sat\\s|\\s?@\\s?|\\sWHERE\\s|&#x40;)";
         String dotRegex = "(\\.|\\sdot\\s)";
+        String optionalDotRegex = "(?:\\.|\\sdot\\s|\\sDOM\\s|;)?";
+        String noCaptureDotRegex =  "(?:\\.|\\sdot\\s|\\sDOM\\s|;)";
+        String domain = "[a-zA-Z]*" + optionalDotRegex + "[a-zA-Z]*" + noCaptureDotRegex + "(?:edu|EDU)";
 
-        String regularExpression = localPart + atRegex + "cse" + dotRegex + "tamu" + dotRegex + "edu";
+
+        String regularExpression = localPart + atRegex + domain; //"cse" + dotRegex + "tamu" + dotRegex + "edu";
         Pattern pattern = Pattern.compile("(?=(" + regularExpression + "))");
         Matcher matcher = pattern.matcher(perspectiveEmail);
 
@@ -23,19 +27,19 @@ public class EmailFinder {
             fromIndex = indexOfGroup + matchedGroup.length();
 
 
-            matchedGroup = matchedGroup.replaceAll("\\(at\\)", "@");
-            matchedGroup = matchedGroup.replaceAll(" at ", "@");
+            matchedGroup = matchedGroup.replaceAll(atRegex, "@");
             matchedGroup = matchedGroup.replaceAll(" dot ", ".");
+            matchedGroup = matchedGroup.replaceAll(noCaptureDotRegex, ".");
             foundEmails.add(matchedGroup);
 
         }
 
 
-        String anotherDotRegex = "(?:\\.|\\sdot\\s)";
 
 
-        String domain = localPart + anotherDotRegex + "tamu.edu";
-        String anotherRegularExpression = "<script type=\"text/javascript\">obfuscate\\(’(" + domain + ")’,’(" + localPart + ")’\\)</script>";
+      //  String anotherRegularExpression = "<script type=\"text/javascript\">obfuscate\\(’(" + domain + ")’,’(" + localPart + ")’\\)</script>";
+        String anotherRegularExpression = "obfuscate\\('(" + domain + ")','(" + localPart + ")'\\)";
+
 
         pattern = Pattern.compile(anotherRegularExpression);
         matcher = pattern.matcher(perspectiveEmail);

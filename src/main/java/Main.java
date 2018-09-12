@@ -9,7 +9,10 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
 
-        File file = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/ashishg");
+        //TODO: dlhw isn't handled yet because it's stupid!
+        List<String> emails = new ArrayList<String>();
+        EmailFinder emailFinder = new EmailFinder();
+        File file = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/levoy");
         Scanner sc = null;
         try {
             sc = new Scanner(file);
@@ -18,10 +21,10 @@ public class Main {
         }
 
         while (sc.hasNextLine()) {
-            System.out.println(sc.nextLine());
+            emails.addAll(emailFinder.findEmail(sc.nextLine()));
         }
 
-
+        System.out.println(emails );
     }
 
     public static List<String> getAllMatches(String text, String regex) {
