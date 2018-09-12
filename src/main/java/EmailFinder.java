@@ -7,12 +7,12 @@ public class EmailFinder {
     public List<String> findEmail(String perspectiveEmail) {
         List<String> foundEmails = new ArrayList<String>();
 
-        String localPart = "[a-zA-Z]*";
+        String anyLetter = "[-a-zA-Z]*";
+        String localPart = anyLetter;
         String atRegex =  "(\\(at\\)|\\sat\\s|\\s?@\\s?|\\sWHERE\\s|&#x40;)";
-        String dotRegex = "(\\.|\\sdot\\s)";
         String optionalDotRegex = "(?:\\.|\\sdot\\s|\\sDOM\\s|;)?";
         String noCaptureDotRegex =  "(?:\\.|\\sdot\\s|\\sDOM\\s|;)";
-        String domain = "[a-zA-Z]*" + optionalDotRegex + "[a-zA-Z]*" + noCaptureDotRegex + "(?:edu|EDU)";
+        String domain = anyLetter + optionalDotRegex + anyLetter + noCaptureDotRegex + "(?:-?e-?d-?u|EDU)";
 
 
         String regularExpression = localPart + atRegex + domain; //"cse" + dotRegex + "tamu" + dotRegex + "edu";
@@ -30,6 +30,7 @@ public class EmailFinder {
             matchedGroup = matchedGroup.replaceAll(atRegex, "@");
             matchedGroup = matchedGroup.replaceAll(" dot ", ".");
             matchedGroup = matchedGroup.replaceAll(noCaptureDotRegex, ".");
+            matchedGroup = matchedGroup.replaceAll("-", "");
             foundEmails.add(matchedGroup);
 
         }
@@ -37,7 +38,6 @@ public class EmailFinder {
 
 
 
-      //  String anotherRegularExpression = "<script type=\"text/javascript\">obfuscate\\(’(" + domain + ")’,’(" + localPart + ")’\\)</script>";
         String anotherRegularExpression = "obfuscate\\('(" + domain + ")','(" + localPart + ")'\\)";
 
 
@@ -48,14 +48,9 @@ public class EmailFinder {
         while (matcher.find(fromIndex)) {
 
             String matchedGroup = matcher.group(1);
-            //System.out.println(matchedGroup);
             int indexOfGroup = perspectiveEmail.indexOf(matchedGroup, fromIndex);
             fromIndex = indexOfGroup + matchedGroup.length();
 
-//            for (int i = 0; i <= matcher.groupCount(); i++) {
-//                System.out.println(i + " --> " + matcher.group(i));
-//                System.out.println(matcher.group(i));
-//            }
 
             foundEmails.add( matcher.group(2) + "@" + matcher.group(1));
         }

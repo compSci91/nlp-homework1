@@ -95,4 +95,16 @@ public class EmailFinderTest {
     }
 
 
+    @Test
+    public void shouldReturnEmailsWhenInterspersedWithDashes(){
+        EmailFinder emailFinder = new EmailFinder();
+        List<String> expectedEmails = new ArrayList<String>() {{ add("dlwh@stanford.edu");}};
+
+        List<String> returnedEmails = emailFinder.findEmail("d-l-w-h-@-s-t-a-n-f-o-r-d-.-e-d-u\n");
+        Assert.assertEquals(expectedEmails, returnedEmails);
+    }
+
+
+
+
 }
