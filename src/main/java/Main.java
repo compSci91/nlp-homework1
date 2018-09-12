@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         //TODO: dlhw isn't handled yet because it's stupid!
-        List<String> emails = new ArrayList<String>();
+        List<ContactInformation> emails = new ArrayList<ContactInformation>();
         EmailFinder emailFinder = new EmailFinder();
 
         File folder = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/");
@@ -18,7 +18,7 @@ public class Main {
 
         for(int i = 0; i< listOfFiles.length; i++){
             File file = listOfFiles[i];
-            System.out.println(file.getName());
+//            System.out.println(file.getName());
 
             Scanner sc = null;
             try {
@@ -30,10 +30,11 @@ public class Main {
             while (sc.hasNextLine()) {
                 List<String> returnedEmails = emailFinder.findEmail(sc.nextLine());
                 for(String returnedEmail : returnedEmails ){
-                    System.out.println(returnedEmail);
+//                    System.out.println(returnedEmail);
+                    emails.add(new ContactInformation(file.getName(), "e", returnedEmail));
                 }
             }
-            System.out.println("\n\n");
+//            System.out.println("\n\n");
 
         }
 
@@ -51,7 +52,7 @@ public class Main {
 //        }
 //
 
-        for(String email : emails ){
+        for(ContactInformation email : emails ){
             System.out.println(email);
         }
         //System.out.println(emails );
