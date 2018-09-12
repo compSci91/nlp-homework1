@@ -12,29 +12,48 @@ public class Main {
         //TODO: dlhw isn't handled yet because it's stupid!
         List<String> emails = new ArrayList<String>();
         EmailFinder emailFinder = new EmailFinder();
-        File file = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/levoy");
-        Scanner sc = null;
-        try {
-            sc = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        File folder = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/");
+        File[] listOfFiles = folder.listFiles();
+
+        for(int i = 0; i< listOfFiles.length; i++){
+            File file = listOfFiles[i];
+            System.out.println(file.getName());
+
+            Scanner sc = null;
+            try {
+                sc = new Scanner(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            while (sc.hasNextLine()) {
+                List<String> returnedEmails = emailFinder.findEmail(sc.nextLine());
+                for(String returnedEmail : returnedEmails ){
+                    System.out.println(returnedEmail);
+                }
+            }
+            System.out.println("\n\n");
+
         }
 
-        while (sc.hasNextLine()) {
-            emails.addAll(emailFinder.findEmail(sc.nextLine()));
-        }
 
-        System.out.println(emails );
+//        File file = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/levoy");
+//        Scanner sc = null;
+//        try {
+//            sc = new Scanner(file);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        while (sc.hasNextLine()) {
+//            emails.addAll(emailFinder.findEmail(sc.nextLine()));
+//        }
+//
+
+        for(String email : emails ){
+            System.out.println(email);
+        }
+        //System.out.println(emails );
     }
-
-    public static List<String> getAllMatches(String text, String regex) {
-        List<String> matches = new ArrayList<String>();
-        Matcher m = Pattern.compile("(?=(" + regex + "))").matcher(text);
-        while(m.find()) {
-            matches.add(m.group(1));
-        }
-        return matches;
-    }
-
-
 }

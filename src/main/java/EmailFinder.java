@@ -22,7 +22,7 @@ public class EmailFinder {
         int fromIndex = 0;
         while (matcher.find(fromIndex)) {
             String matchedGroup = matcher.group(1);
-                System.out.println(matchedGroup);
+                //System.out.println(matchedGroup);
             int indexOfGroup = perspectiveEmail.indexOf(matchedGroup, fromIndex);
             fromIndex = indexOfGroup + matchedGroup.length();
 
@@ -48,7 +48,7 @@ public class EmailFinder {
         while (matcher.find(fromIndex)) {
 
             String matchedGroup = matcher.group(1);
-            System.out.println(matchedGroup);
+            //System.out.println(matchedGroup);
             int indexOfGroup = perspectiveEmail.indexOf(matchedGroup, fromIndex);
             fromIndex = indexOfGroup + matchedGroup.length();
 
