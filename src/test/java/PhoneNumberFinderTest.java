@@ -39,6 +39,17 @@ public class PhoneNumberFinderTest {
     }
 
     @Test
+    public void shouldReturnPhoneNumberWhenThereAreNoParenthesisAroundTheAreaCode(){
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("650-723-5666");  }};
+
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("        <small>FAX</small> +1 650 723 5666<br />\n");
+
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
+    }
+
+    @Test
     public void shouldReturnPHoneNumberWhenLabeledWithTelAndCountryCode() {
         List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
@@ -57,6 +68,8 @@ public class PhoneNumberFinderTest {
 
         Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
     }
+
+
 
     @Test
     public void shouldReturnPhoneNumberWhenEmbeddedHTML(){
