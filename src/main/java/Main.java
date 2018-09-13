@@ -8,9 +8,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        //TODO: dlhw isn't handled yet because it's stupid!
-        List<ContactInformation> emails = new ArrayList<ContactInformation>();
+        List<ContactInformation> contactInformation = new ArrayList<ContactInformation>();
         EmailFinder emailFinder = new EmailFinder();
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
         File folder = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/");
         File[] listOfFiles = folder.listFiles();
@@ -25,15 +25,22 @@ public class Main {
             }
 
             while (sc.hasNextLine()) {
-                List<String> returnedEmails = emailFinder.findEmail(sc.nextLine());
-                for(String returnedEmail : returnedEmails ){
-                    emails.add(new ContactInformation(file.getName(), "e", returnedEmail));
+                String nextLine = sc.nextLine();
+                List<String> returnedEmails = emailFinder.findEmail(nextLine);
+                List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber(nextLine);
+
+//                for(String returnedEmail : returnedEmails ){
+//                    contactInformation.add(new ContactInformation(file.getName(), "e", returnedEmail));
+//                }
+
+                for(String returnedPhoneNumber : returnedPhoneNumbers) {
+                    contactInformation.add(new ContactInformation(file.getName(), "p", returnedPhoneNumber));
                 }
             }
 
         }
 
-        for(ContactInformation email : emails ){
+        for(ContactInformation email : contactInformation ){
             System.out.println(email);
         }
     }

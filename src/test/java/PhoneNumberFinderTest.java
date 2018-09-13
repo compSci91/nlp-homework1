@@ -17,6 +17,28 @@ public class PhoneNumberFinderTest {
     }
 
     @Test
+    public void shouldReturnPhoneNumberFromLabeledNumberWithNoSpaceBetweenAreaCodeAndPhoneNumber(){
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
+
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("Phone: (979)862-2908");
+
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
+    }
+
+    @Test
+    public void shouldReturnFaxNumberFromLabeledNumberWithNoSpaceBetweenAreaCodeAndPhoneNumber(){
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
+
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("Fax: (979)862-2908");
+
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
+    }
+
+    @Test
     public void shouldReturnPHoneNumberWhenLabeledWithTelAndCountryCode() {
         List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();

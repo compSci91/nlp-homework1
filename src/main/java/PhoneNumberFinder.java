@@ -15,9 +15,10 @@ public class PhoneNumberFinder {
         String firstPartOfPhoneNumber = "[\\d]{3}";
         String secondPartOfPhoneNumber = "[\\d]{4}";
         String phoneNumberRegEx = "(" + firstPartOfPhoneNumber + "-" + secondPartOfPhoneNumber + ")";
-        String prefixRegEx = "(Phone|Tel " + countryCodeRegEx + ")";
+        String prefixRegEx = "(Fax|Phone|Tel " + countryCodeRegEx + ")";
 
-        String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[\\s|-]" + phoneNumberRegEx;
+        String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
+     //   String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
 
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectivePhoneNumber);
