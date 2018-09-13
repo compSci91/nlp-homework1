@@ -17,8 +17,8 @@ public class PhoneNumberFinder {
         String phoneNumberRegEx = "(" + firstPartOfPhoneNumber + "-" + secondPartOfPhoneNumber + ")";
         String prefixRegEx = "(Fax|Phone|Tel " + countryCodeRegEx + ")";
 
-        String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
-     //   String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
+       // String regularExpression = prefixRegEx + ":\\s"+ areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
+        String regularExpression = areaCodeRegEx + "[(?:\\s)*|-]" + phoneNumberRegEx;
 
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectivePhoneNumber);
@@ -34,7 +34,7 @@ public class PhoneNumberFinder {
             int indexOfGroup = perspectivePhoneNumber.indexOf(matchedGroup, fromIndex);
             fromIndex = indexOfGroup + matchedGroup.length();
 
-           reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3);
+           reconstructedPhoneNumber =  matcher.group(1) + "-" + matcher.group(2);
             phoneNumberToReturn.add(reconstructedPhoneNumber);
         }
 

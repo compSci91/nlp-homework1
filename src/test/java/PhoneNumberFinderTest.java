@@ -49,6 +49,16 @@ public class PhoneNumberFinderTest {
     }
 
     @Test
+    public void shouldReturnPhoneNumberWhenUnLabeled() {
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("650-723-4173");  }};
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("      Admin asst: Roz Morf, Terman 405, (650)723-4173, rozm @ stanford.edu</span></p>\n");
+
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
+    }
+
+    @Test
     public void shouldReturnPhoneNumberWhenEmbeddedHTML(){
         List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
