@@ -1,8 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneNumberFinder {
-    public String findPhoneNumber(String perspectivePhoneNumber) {
+    public List<String> findPhoneNumber(String perspectivePhoneNumber) {
+
+        List<String> phoneNumberToReturn = new ArrayList<String>();
+
         String reconstructedPhoneNumber = "";
 
         String countryCodeRegEx = "\\(?\\+[\\d]{1,3}\\)?";
@@ -24,8 +29,7 @@ public class PhoneNumberFinder {
             }
 
            reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3);
-
-            return reconstructedPhoneNumber;
+            phoneNumberToReturn.add(reconstructedPhoneNumber);
         }
 
         String anotherRegularExpression = "<a href=\"contact.html\">TEL</a> " + countryCodeRegEx + "&thinsp;(" + areaCodeRegEx + ")&thinsp;(" + firstPartOfPhoneNumber + ")&thinsp;(" + secondPartOfPhoneNumber + ")";
@@ -42,10 +46,12 @@ public class PhoneNumberFinder {
 
             reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3) + "-" + matcher.group(4);
 
-            return reconstructedPhoneNumber;
+            phoneNumberToReturn.add(reconstructedPhoneNumber);
         }
 
 
-        return reconstructedPhoneNumber;
+        //phoneNumberToReturn.add( reconstructedPhoneNumber );
+
+        return phoneNumberToReturn;
     }
 }

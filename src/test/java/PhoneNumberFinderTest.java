@@ -1,37 +1,38 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhoneNumberFinderTest {
     @Test
     public void shouldReturnPhoneNumberFromLabeledNumber(){
-        String expectedPhoneNumber = "979-862-2908";
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
+
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        String returnedPhoneNumber = phoneNumberFinder.findPhoneNumber("Phone: (979) 862-2908");
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("Phone: (979) 862-2908");
 
-        Assert.assertEquals(expectedPhoneNumber, returnedPhoneNumber);
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
     }
 
     @Test
     public void shouldReturnPHoneNumberWhenLabeledWithTelAndCountryCode() {
-        String expectedPhoneNumber = "979-862-2908";
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        String returnedPhoneNumber = phoneNumberFinder.findPhoneNumber("Tel (+1): 979-862-2908");
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("Tel (+1): 979-862-2908");
 
-        Assert.assertEquals(expectedPhoneNumber, returnedPhoneNumber);
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
     }
 
     @Test
     public void shouldReturnPhoneNumberWhenEmbeddedHTML(){
-        String expectedPhoneNumber = "979-862-2908";
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("979-862-2908");  }};
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        String returnedPhoneNumber = phoneNumberFinder.findPhoneNumber("<a href=\"contact.html\">TEL</a> +1&thinsp;979&thinsp;862&thinsp;2908");
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("<a href=\"contact.html\">TEL</a> +1&thinsp;979&thinsp;862&thinsp;2908");
 
-        Assert.assertEquals(expectedPhoneNumber, returnedPhoneNumber);
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
     }
 }
