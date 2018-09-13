@@ -35,4 +35,14 @@ public class PhoneNumberFinderTest {
 
         Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
     }
+
+    @Test
+    public void shouldReturnAllPhoneNumbers(){
+        List<String> expectedPhoneNumbers = new ArrayList<String>() {{ add("123-456-7890"); add("210-867-5309"); add("979-862-2908");}};
+        PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
+
+        List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber("<a href=\"contact.html\">TEL</a> +1&thinsp;979&thinsp;862&thinsp;2908 lskdfjlsfd Tel (+1): 123-456-7890 lsdjflsdf Phone: (210) 867-5309 ");
+
+        Assert.assertEquals(expectedPhoneNumbers, returnedPhoneNumbers);
+    }
 }

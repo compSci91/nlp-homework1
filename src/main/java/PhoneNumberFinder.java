@@ -22,11 +22,16 @@ public class PhoneNumberFinder {
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(perspectivePhoneNumber);
 
-        if (matcher.matches()) {
-            for (int i = 0; i <= matcher.groupCount(); i++) {
-                System.out.println(i + " --> " + matcher.group(i));
-                System.out.println(matcher.group(i));
-            }
+        int fromIndex = 0;
+        while (matcher.find(fromIndex)) {
+//            for (int i = 0; i <= matcher.groupCount(); i++) {
+//                System.out.println(i + " --> " + matcher.group(i));
+//                System.out.println(matcher.group(i));
+//            }
+
+            String matchedGroup = matcher.group(1);
+            int indexOfGroup = perspectivePhoneNumber.indexOf(matchedGroup, fromIndex);
+            fromIndex = indexOfGroup + matchedGroup.length();
 
            reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3);
             phoneNumberToReturn.add(reconstructedPhoneNumber);
@@ -38,11 +43,17 @@ public class PhoneNumberFinder {
         pattern = Pattern.compile(anotherRegularExpression);
         matcher = pattern.matcher(perspectivePhoneNumber);
 
-        if (matcher.matches()) {
-            for (int i = 0; i <= matcher.groupCount(); i++) {
-                System.out.println(i + " --> " + matcher.group(i));
-                System.out.println(matcher.group(i));
-            }
+        fromIndex = 0;
+
+        while (matcher.find(fromIndex)) {
+//            for (int i = 0; i <= matcher.groupCount(); i++) {
+//                System.out.println(i + " --> " + matcher.group(i));
+//                System.out.println(matcher.group(i));
+//            }
+
+            String matchedGroup = matcher.group(1);
+            int indexOfGroup = perspectivePhoneNumber.indexOf(matchedGroup, fromIndex);
+            fromIndex = indexOfGroup + matchedGroup.length();
 
             reconstructedPhoneNumber =  matcher.group(2) + "-" + matcher.group(3) + "-" + matcher.group(4);
 
