@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        List<ContactInformation> contactInformation = new ArrayList<ContactInformation>();
         EmailFinder emailFinder = new EmailFinder();
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
@@ -17,6 +15,7 @@ public class Main {
 
         for(int i = 0; i< listOfFiles.length; i++){
             File file = listOfFiles[i];
+            System.out.println(file.getName());
             Scanner sc = null;
             try {
                 sc = new Scanner(file);
@@ -29,19 +28,16 @@ public class Main {
                 List<String> returnedEmails = emailFinder.findEmail(nextLine);
                 List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber(nextLine);
 
-//                for(String returnedEmail : returnedEmails ){
-//                    contactInformation.add(new ContactInformation(file.getName(), "e", returnedEmail));
-//                }
+                for(String returnedEmail : returnedEmails ){
+                    System.out.println(new ContactInformation(file.getName(), "e", returnedEmail));
+                }
 
                 for(String returnedPhoneNumber : returnedPhoneNumbers) {
-                    contactInformation.add(new ContactInformation(file.getName(), "p", returnedPhoneNumber));
+                    System.out.println(new ContactInformation(file.getName(), "p", returnedPhoneNumber));
                 }
             }
 
-        }
-
-        for(ContactInformation email : contactInformation ){
-            System.out.println(email);
+            System.out.println();
         }
     }
 }
