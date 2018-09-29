@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Main {
+public class Main { //8783449c-99ef-4b60-92bd-576723410e21
     public static void main(String[] args) {
         EmailFinder emailFinder = new EmailFinder();
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        File folder = new File("/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/");
+        //"/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/"
+        String directory = args[0];
+        File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
 
         for(int i = 0; i< listOfFiles.length; i++){
