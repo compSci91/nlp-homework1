@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Main { //8783449c-99ef-4b60-92bd-576723410e21
@@ -10,8 +11,8 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
         EmailFinder emailFinder = new EmailFinder();
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        //"/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/PA1-638/data_dev/dev/"
-        String directory = args[0];
+        //String directory = args[0];
+        String directory = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/dev/";
         File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
 
@@ -41,5 +42,34 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
 
             System.out.println();
         }
+
+        System.out.println();
+        System.out.println("*******************************************************");
+        System.out.println();
+
+        String devGoldFilePath = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/devGOLD";
+
+        File devGOLDFile = new File(devGoldFilePath);
+
+        Set<ContactInformation> goldStandard = new HashSet<ContactInformation>();
+
+        Scanner goldFileScanner = null;
+
+        try {
+            goldFileScanner = new Scanner(devGOLDFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while(goldFileScanner.hasNextLine()){
+            String contactString = goldFileScanner.nextLine();
+
+            Scanner contactStringScanner = new Scanner(contactString);
+
+            ContactInformation goldContactInformation = new ContactInformation(contactStringScanner.next(), contactStringScanner.next(), contactStringScanner.next());
+            System.out.println(goldContactInformation);
+
+        }
+
     }
 }
