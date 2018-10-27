@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 
 public class Main { //8783449c-99ef-4b60-92bd-576723410e21
@@ -15,6 +12,8 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
         String directory = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/dev/";
         File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
+
+        Set<ContactInformation> foundContactInformation = new HashSet<ContactInformation>();
 
         for(int i = 0; i< listOfFiles.length; i++){
             File file = listOfFiles[i];
@@ -32,11 +31,15 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
                 List<String> returnedPhoneNumbers = phoneNumberFinder.findPhoneNumber(nextLine);
 
                 for(String returnedEmail : returnedEmails ){
-                    System.out.println(new ContactInformation(file.getName(), "e", returnedEmail));
+                    ContactInformation email = new ContactInformation(file.getName(), "e", returnedEmail);
+                    foundContactInformation.add(email);
+                  //  System.out.println(email);
                 }
 
                 for(String returnedPhoneNumber : returnedPhoneNumbers) {
-                    System.out.println(new ContactInformation(file.getName(), "p", returnedPhoneNumber));
+                    ContactInformation phoneNumber = new ContactInformation(file.getName(), "p", returnedPhoneNumber);
+                    foundContactInformation.add(phoneNumber);
+                    //System.out.println(phoneNumber);
                 }
             }
 
@@ -51,7 +54,7 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
 
         File devGOLDFile = new File(devGoldFilePath);
 
-        Set<ContactInformation> goldStandard = new HashSet<ContactInformation>();
+        Set<ContactInformation> goldStandardSet = new HashSet<ContactInformation>();
 
         Scanner goldFileScanner = null;
 
@@ -67,9 +70,33 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
             Scanner contactStringScanner = new Scanner(contactString);
 
             ContactInformation goldContactInformation = new ContactInformation(contactStringScanner.next(), contactStringScanner.next(), contactStringScanner.next());
-            System.out.println(goldContactInformation);
+            goldStandardSet.add(goldContactInformation);
+           // System.out.println(goldContactInformation);
 
         }
 
+        //        for(ContactInformation foundContactInfo : foundContactInformation){
+//            System.out.println(foundContactInfo);
+//        }
+
+        //calculate true positives
+        int numberOfTruePositive = 0;
+        List<ContactInformation> truePositives = new ArrayList<ContactInformation>();
+
+        for(ContactInformation contactInformation : foundContactInformation){
+            //System.out.println(contactInformation);
+            if(goldStandardSet.contains(contactInformation)){
+                numberOfTruePositive++;
+                truePositives.add(contactInformation);
+            }
+        }
+
+
+        System.out.println("True Positives (" + numberOfTruePositive + ")");
+        for(ContactInformation truePositive : truePositives){
+            System.out.println(truePositive);
+        }
+
+        System.out.println(goldStandardSet.size());
     }
 }

@@ -4,6 +4,14 @@ public class ContactInformation {
     private String type;
     private String value;
 
+    @Override
+    public int hashCode() {
+        int result = filename != null ? filename.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
+    }
+
     public ContactInformation(String filename, String type, String value) {
         this.filename = filename;
         this.type = type;
@@ -12,14 +20,21 @@ public class ContactInformation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(o instanceof ContactInformation){
+            ContactInformation otherContactInformation = (ContactInformation)o;
 
-        ContactInformation that = (ContactInformation) o;
+            return this.filename.equals(otherContactInformation.filename) && this.type.equals(otherContactInformation.type) && this.value.equals(otherContactInformation.value);
+        }
 
-        if (filename != null ? !filename.equals(that.filename) : that.filename != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        return value != null ? value.equals(that.value) : that.value == null;
+        return false;
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        ContactInformation that = (ContactInformation) o;
+//
+//        if (filename != null ? !filename.equals(that.filename) : that.filename != null) return false;
+//        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+//        return value != null ? value.equals(that.value) : that.value == null;
 
     }
 
