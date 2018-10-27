@@ -80,23 +80,32 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
 //        }
 
         //calculate true positives
-        int numberOfTruePositive = 0;
         List<ContactInformation> truePositives = new ArrayList<ContactInformation>();
+
+      //  int numberOfFalsePositives = 0;
+        List<ContactInformation> falsePositives = new ArrayList<ContactInformation>();
 
         for(ContactInformation contactInformation : foundContactInformation){
             //System.out.println(contactInformation);
             if(goldStandardSet.contains(contactInformation)){
-                numberOfTruePositive++;
                 truePositives.add(contactInformation);
+            } else {
+                falsePositives.add(contactInformation);
             }
         }
 
 
-        System.out.println("True Positives (" + numberOfTruePositive + ")");
+        System.out.println("True Positives (" + truePositives.size() + ")");
         for(ContactInformation truePositive : truePositives){
             System.out.println(truePositive);
         }
 
-        System.out.println(goldStandardSet.size());
+        System.out.println();
+        System.out.println("False Positives (" + falsePositives.size() + ")");
+        for(ContactInformation falsePositive : falsePositives){
+            System.out.println(falsePositive);
+        }
+
+        //System.out.println(goldStandardSet.size());
     }
 }
