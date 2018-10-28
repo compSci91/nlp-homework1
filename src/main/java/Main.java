@@ -8,8 +8,11 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
         EmailFinder emailFinder = new EmailFinder();
         PhoneNumberFinder phoneNumberFinder = new PhoneNumberFinder();
 
-        //String directory = args[0];
-        String directory = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/dev/";
+        String directory = args[0];
+        String devGoldFilePath = args[1];
+//        String directory = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/dev/";
+//        String devGoldFilePath = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/devGOLD";
+
         File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
 
@@ -17,7 +20,7 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
 
         for(int i = 0; i< listOfFiles.length; i++){
             File file = listOfFiles[i];
-            System.out.println(file.getName());
+           // System.out.println(file.getName());
             Scanner sc = null;
             try {
                 sc = new Scanner(file);
@@ -43,14 +46,14 @@ public class Main { //8783449c-99ef-4b60-92bd-576723410e21
                 }
             }
 
-            System.out.println();
+          //  System.out.println();
         }
 
-        System.out.println();
-        System.out.println("*******************************************************");
-        System.out.println();
+//        System.out.println();
+//        System.out.println("*******************************************************");
+//        System.out.println();
 
-        String devGoldFilePath = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/devGOLD";
+       // String devGoldFilePath = "/Users/JoshuaHowell/Desktop/Texas A&M/Year 2/Fall 2018/Natural Language Processing/Homework 1/build/classes/main/data_dev/devGOLD";
 
         File devGOLDFile = new File(devGoldFilePath);
 
